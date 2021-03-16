@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="MacOS如何安装和管理多个版本的python, Sean的博客">
+    <meta name="keywords" content="如何提高自动化测试脚本的质量, Sean的博客">
     <meta name="description" content="chdxia | blog">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>MacOS如何安装和管理多个版本的python | Sean的博客</title>
+    <title>如何提高自动化测试脚本的质量 | Sean的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">MacOS如何安装和管理多个版本的python</h1>
+                    <h1 class="description center-align post-title">如何提高自动化测试脚本的质量</h1>
                 </div>
             </div>
         </div>
@@ -431,12 +431,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/brew/">
-                                <span class="chip bg-color">brew</span>
+                            <a href="/tags/mock/">
+                                <span class="chip bg-color">mock</span>
                             </a>
                         
-                            <a href="/tags/python/">
-                                <span class="chip bg-color">python</span>
+                            <a href="/tags/httprunner/">
+                                <span class="chip bg-color">httprunner</span>
                             </a>
                         
                     </div>
@@ -447,8 +447,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/python/" class="post-category">
-                                python
+                            <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" class="post-category">
+                                自动化测试
                             </a>
                         
                     </div>
@@ -460,7 +460,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-06
+                    2021-03-16
                 </div>
                 
 
@@ -491,51 +491,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>当我们使用的工具需要用到多个不同python版本时，按照传统的安装方式会有环境变量上的问题，处理起来也比较繁琐。所以pyenv能够帮我们很好的管理python版本，它安装多个python版本，切换全局python版本，创建和管理python虚拟环境。</p>
-<h3 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装Homebrew</h3><p>Homebrew是MacOS平台的一个软件包管理工具，能够很方便的安装、卸载工具包。linux平台也有yum、dnf等工具。</p>
-<p>执行命令来安装Homebrew，该命令请以最新的<a target="_blank" rel="noopener" href="https://brew.sh/index_zh-cn">官方文档</a>为准</p>
-<pre class=" language-bash"><code class="language-bash">/bin/bash -c <span class="token string">"<span class="token variable"><span class="token variable">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="token variable">)</span></span>"</span>
-</code></pre>
-<p>如果没有科学工具，安装的时候可能会遇到raw.githubusercontent.com无法访问的问题，我们可以通过修改hosts来解决。修改hosts，可以避免DNS污染，从而让域名指向我们所设置的ip。修改hosts时如果权限不够，我们需要用sudo的权限来修改。</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vi</span> /etc/hosts
-</code></pre>
-<p>我们通过<a target="_blank" rel="noopener" href="https://www.ipaddress.com/">域名解析网站</a>获取raw.githubusercontent.com的正确ip，然后添加到<code>/etc/hosts</code>文件里面，格式例如</p>
-<pre class=" language-txt"><code class="language-txt">185.199.108.133 raw.githubusercontent.com
-</code></pre>
-<h3 id="安装pyenv"><a href="#安装pyenv" class="headerlink" title="安装pyenv"></a>安装pyenv</h3><p>不建议使用Homebrew直接安装python，这样不方便多个python版本的管理和切换。</p>
-<p>使用Homebrew来安装pyenv</p>
-<pre class=" language-bash"><code class="language-bash">brew <span class="token function">install</span> pyenv
-</code></pre>
-<p>没有科学工具的需要设置brew到国内源。</p>
-<p>pyenv安装完成会提示我们需要在配置文件中添加<code>eval &quot;$(pyenv init-)&quot;</code>。旧版本的MacOS默认使用的是bash shell，配置文件的路径是<code>~/.bash_profile</code>，新版本的MacOS默认使用的是Z shell，配置文件的路径是<code>~/.zshrc</code>，不过我们可以手动切换shell。</p>
-<p>查看当前使用的shell</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token variable">$SHELL</span>
-</code></pre>
-<p>切换为Z shell</p>
-<pre class=" language-bash"><code class="language-bash">chsh -s /bin/zsh
-</code></pre>
-<p>当前使用的是哪个shell就把<code>eval &quot;$(pyenv init-)&quot;</code>添加到哪个配置文件中。</p>
-<h3 id="安装python"><a href="#安装python" class="headerlink" title="安装python"></a>安装python</h3><p>pyenv安装完成之后，就可以用pyenv来安装python了。</p>
-<p>查看可供安装的python版本</p>
-<pre class=" language-bash"><code class="language-bash">pyenv <span class="token function">install</span> --list
-</code></pre>
-<p>安装python的3.8.7版本</p>
-<pre class=" language-bash"><code class="language-bash">pyenv <span class="token function">install</span> 3.8.7
-</code></pre>
-<p>查看已安装的所有版本（*表示当前使用的版本）</p>
-<pre class=" language-bash"><code class="language-bash">pyenv versions
-</code></pre>
-<p>切换当前使用的版本为3.8.7</p>
-<pre class=" language-bash"><code class="language-bash">pyenv global 3.8.7
-</code></pre>
-<p>切换后查看python和pip版本</p>
-<pre class=" language-bash"><code class="language-bash">python --version
-pip --version
-</code></pre>
-<p>卸载python 3.8.7版本</p>
-<pre class=" language-bash"><code class="language-bash">pyenv uninstall 3.8.7
-</code></pre>
-
+                
                 
             </div>
             <hr/>
@@ -561,7 +517,7 @@ pip --version
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://blog.chdxia.com/2021/03/06/MacOS%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84python/">https://blog.chdxia.com/2021/03/06/MacOS%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84python/</a>
+                    <a href="https://blog.chdxia.com/2021/03/16/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B4%A8%E9%87%8F/">https://blog.chdxia.com/2021/03/16/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B4%A8%E9%87%8F/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -599,12 +555,12 @@ pip --version
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/brew/">
-                                    <span class="chip bg-color">brew</span>
+                                <a href="/tags/mock/">
+                                    <span class="chip bg-color">mock</span>
                                 </a>
                             
-                                <a href="/tags/python/">
-                                    <span class="chip bg-color">python</span>
+                                <a href="/tags/httprunner/">
+                                    <span class="chip bg-color">httprunner</span>
                                 </a>
                             
                         </div>
@@ -776,9 +732,10 @@ pip --version
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/03/16/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B4%A8%E9%87%8F/">
                     <div class="card-image">
@@ -796,9 +753,9 @@ pip --version
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-16
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-16
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -811,6 +768,7 @@ pip --version
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -830,7 +788,7 @@ pip --version
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2021/03/06/MacOS%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84python/">
@@ -864,7 +822,6 @@ pip --version
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
