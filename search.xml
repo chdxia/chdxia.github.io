@@ -2,60 +2,6 @@
 <search> 
   
   
-    
-    <entry>
-      <title>如何提高自动化测试脚本的质量</title>
-      <link href="2021/03/16/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B4%A8%E9%87%8F/"/>
-      <url>2021/03/16/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B4%A8%E9%87%8F/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      <categories>
-          
-          <category> 自动化测试 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> mock </tag>
-            
-            <tag> httprunner </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>MacOS如何安装和管理多个版本的python</title>
-      <link href="2021/03/06/MacOS%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84python/"/>
-      <url>2021/03/06/MacOS%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E5%92%8C%E7%AE%A1%E7%90%86%E5%A4%9A%E4%B8%AA%E7%89%88%E6%9C%AC%E7%9A%84python/</url>
-      
-        <content type="html"><![CDATA[<p>当我们使用的工具需要用到多个不同python版本时，按照传统的安装方式会有环境变量上的问题，处理起来也比较繁琐。所以pyenv能够帮我们很好的管理python版本，它安装多个python版本，切换全局python版本，创建和管理python虚拟环境。</p><h3 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装Homebrew</h3><p>Homebrew是MacOS平台的一个软件包管理工具，能够很方便的安装、卸载工具包。linux平台也有yum、dnf等工具。</p><p>执行命令来安装Homebrew，该命令请以最新的<a href="https://brew.sh/index_zh-cn">官方文档</a>为准</p><pre class=" language-bash"><code class="language-bash">/bin/bash -c <span class="token string">"<span class="token variable"><span class="token variable">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="token variable">)</span></span>"</span></code></pre><p>如果没有科学工具，安装的时候可能会遇到raw.githubusercontent.com无法访问的问题，我们可以通过修改hosts来解决。修改hosts，可以避免DNS污染，从而让域名指向我们所设置的ip。修改hosts时如果权限不够，我们需要用sudo的权限来修改。</p><pre class=" language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vi</span> /etc/hosts</code></pre><p>我们通过<a href="https://www.ipaddress.com/">域名解析网站</a>获取raw.githubusercontent.com的正确ip，然后添加到<code>/etc/hosts</code>文件里面，格式例如</p><pre class=" language-txt"><code class="language-txt">185.199.108.133 raw.githubusercontent.com</code></pre><h3 id="安装pyenv"><a href="#安装pyenv" class="headerlink" title="安装pyenv"></a>安装pyenv</h3><p>不建议使用Homebrew直接安装python，这样不方便多个python版本的管理和切换。</p><p>使用Homebrew来安装pyenv</p><pre class=" language-bash"><code class="language-bash">brew <span class="token function">install</span> pyenv</code></pre><p>没有科学工具的需要设置brew到国内源。</p><p>pyenv安装完成会提示我们需要在配置文件中添加<code>eval &quot;$(pyenv init-)&quot;</code>。旧版本的MacOS默认使用的是bash shell，配置文件的路径是<code>~/.bash_profile</code>，新版本的MacOS默认使用的是Z shell，配置文件的路径是<code>~/.zshrc</code>，不过我们可以手动切换shell。</p><p>查看当前使用的shell</p><pre class=" language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token variable">$SHELL</span></code></pre><p>切换为Z shell</p><pre class=" language-bash"><code class="language-bash">chsh -s /bin/zsh</code></pre><p>当前使用的是哪个shell就把<code>eval &quot;$(pyenv init-)&quot;</code>添加到哪个配置文件中。</p><h3 id="安装python"><a href="#安装python" class="headerlink" title="安装python"></a>安装python</h3><p>pyenv安装完成之后，就可以用pyenv来安装python了。</p><p>查看可供安装的python版本</p><pre class=" language-bash"><code class="language-bash">pyenv <span class="token function">install</span> --list</code></pre><p>安装python的3.8.7版本</p><pre class=" language-bash"><code class="language-bash">pyenv <span class="token function">install</span> 3.8.7</code></pre><p>查看已安装的所有版本（*表示当前使用的版本）</p><pre class=" language-bash"><code class="language-bash">pyenv versions</code></pre><p>切换当前使用的版本为3.8.7</p><pre class=" language-bash"><code class="language-bash">pyenv global 3.8.7</code></pre><p>切换后查看python和pip版本</p><pre class=" language-bash"><code class="language-bash">python --versionpip --version</code></pre><p>卸载python 3.8.7版本</p><pre class=" language-bash"><code class="language-bash">pyenv uninstall 3.8.7</code></pre>]]></content>
-      
-      
-      <categories>
-          
-          <category> python </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> brew </tag>
-            
-            <tag> python </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
   
   
 </search>
